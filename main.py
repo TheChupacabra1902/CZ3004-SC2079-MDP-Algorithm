@@ -43,7 +43,21 @@ def path_finding():
 
     start = time.time()
     # Get shortest path
-    optimal_path, distance = maze_solver.get_optimal_order_dp(retrying=retrying)
+    #optimal_path, distance = maze_solver.get_optimal_order_dp(retrying=retrying) # legacy code
+
+    #---------code improvement-------------------------------------------------------------------------------------
+    target_id = content.get('target_id')
+
+    if target_id is not None:
+        optimal_path, distance = maze_solver.get_path_to_obstacle(
+            target_id,
+            retrying=retrying
+        )
+    else:
+        optimal_path, distance = maze_solver.get_optimal_order_dp(
+            retrying=retrying
+        )
+    #------------------------------------------------------------------------------------------------------------
     print(f"Time taken to find shortest path using A* search: {time.time() - start}s")
     print(f"Distance to travel: {distance} units")
     

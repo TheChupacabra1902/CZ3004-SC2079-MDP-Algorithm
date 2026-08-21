@@ -372,6 +372,47 @@ class MazeSolver:
             self.path_table[(start, end)] = path[::-1]
             self.path_table[(end, start)] = path
 
+    #------------------------------------------------code improvement-----------------------------------------------------------------
+    def get_path_to_obstacle(self, obstacle_id, retrying=False):
+        view_positions = self.grid.get_view_obstacle_positions(retrying)
+
+        target_positions = None
+
+        for obstacle, positions in zip(self.grid.obstacles, view_positions):
+            if obstacle.id == obstacle_id:
+                target_positions = positions
+                break
+
+        if not target_positions:
+            return [], 1e9
+
+        items = [self.robot.get_start_state()] + target_positions
+
+        self.path_cost_generator(items)
+
+        best_path = []
+        best_cost = 1e9
+
+        for target in target_positions:
+            key = (items[0], target)
+
+            if key not in self.path_table:
+                continue
+
+            cost = self.cost_table[key] + target.penalty
+
+            if cost < best_cost:
+                best_cost = cost
+                best_path = [
+                    CellState(p[0], p[1], p[2])
+                    for p in self.path_table[key]
+                ]
+
+                best_path[-1].set_screenshot(target.screenshot_id)
+
+        return best_path, best_cost
+#--------------------------------------------------------------------------------------------------------------
+
         def astar_search(start: CellState, end: CellState):
             # astar search algo with three states: x, y, direction
 
