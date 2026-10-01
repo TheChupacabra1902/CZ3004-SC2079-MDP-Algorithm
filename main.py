@@ -59,6 +59,8 @@ def path_finding():
             continue
         if command.startswith("FIN"):
             continue
+        if command.startswith("PAUSE"):
+            continue
         elif command.startswith("FW") or command.startswith("FS"):
             i += int(command[2:]) // 10
         elif command.startswith("BW") or command.startswith("BS"):

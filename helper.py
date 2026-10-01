@@ -121,17 +121,21 @@ def command_generator(states, obstacles):
             if states[i].direction == Direction.EAST:
                 # y value increased -> Forward Right
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("FR{}".format(steps))
                 # y value decreased -> Backward Left
                 else:
+                    commands.append("PAUSE")
                     commands.append("BL{}".format(steps))
             # Facing west afterwards
             elif states[i].direction == Direction.WEST:
                 # y value increased -> Forward Left
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("FL{}".format(steps))
                 # y value decreased -> Backward Right
                 else:
+                    commands.append("PAUSE")
                     commands.append("BR{}".format(steps))
             else:
                 raise Exception("Invalid turing direction")
@@ -139,14 +143,18 @@ def command_generator(states, obstacles):
         elif states[i - 1].direction == Direction.EAST:
             if states[i].direction == Direction.NORTH:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("FL{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("BR{}".format(steps))
 
             elif states[i].direction == Direction.SOUTH:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("BL{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("FR{}".format(steps))
             else:
                 raise Exception("Invalid turing direction")
@@ -154,13 +162,17 @@ def command_generator(states, obstacles):
         elif states[i - 1].direction == Direction.SOUTH:
             if states[i].direction == Direction.EAST:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("BR{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("FL{}".format(steps))
             elif states[i].direction == Direction.WEST:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("BL{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("FR{}".format(steps))
             else:
                 raise Exception("Invalid turing direction")
@@ -168,13 +180,17 @@ def command_generator(states, obstacles):
         elif states[i - 1].direction == Direction.WEST:
             if states[i].direction == Direction.NORTH:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("FR{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("BL{}".format(steps))
             elif states[i].direction == Direction.SOUTH:
                 if states[i].y > states[i - 1].y:
+                    commands.append("PAUSE")
                     commands.append("BR{}".format(steps))
                 else:
+                    commands.append("PAUSE")
                     commands.append("FL{}".format(steps))
             else:
                 raise Exception("Invalid turing direction")
